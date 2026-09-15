@@ -29,15 +29,31 @@
   .answer{font-weight:700}
   .unanswered{outline:3px solid #e0a800}
   footer{text-align:center;color:#667085;font-size:13px;padding:10px}
+  .order-list{list-style:none;padding:0;margin:14px 0}
+  .order-item{display:flex;align-items:center;gap:8px;background:#f7f9fb;border:1px solid #d8dee4;border-radius:9px;padding:10px;margin:8px 0}
+  .order-item span{flex:1;font-weight:700}
+  .move{padding:7px 11px;margin:0;background:#e8edf2;color:#17212b;font-size:15px}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
   <h1>Layers of the Earth — Practice Quiz</h1>
-  <p class="sub">20 questions based on the class worksheet: composition, thickness, and state of matter.</p>
+  <p class="sub">24 questions based on the class worksheet: composition, thickness, and state of matter.</p>
 </header>
 <div id="quiz"></div>
+<div class="card" id="orderCard">
+ <div class="question">21. Put the layers in order from the <strong>most inner part</strong> of Earth to the <strong>outermost part</strong>.</div>
+ <p>Use the arrows to move each layer into the correct position.</p>
+ <ul id="orderList" class="order-list"></ul>
+ <div class="feedback" id="orderFeedback"></div>
+</div>
+<div class="card" id="q22"><div class="question">22. Which layer is immediately outside the inner core?</div>
+<label><input type="radio" name="q22" value="0"> A. Lithosphere</label><label><input type="radio" name="q22" value="1"> B. Outer Core</label><label><input type="radio" name="q22" value="2"> C. Asthenosphere</label><label><input type="radio" name="q22" value="3"> D. Mesosphere</label><div class="feedback" id="f22"></div></div>
+<div class="card" id="q23"><div class="question">23. Moving from Earth's surface toward the center, which layer comes immediately after the asthenosphere?</div>
+<label><input type="radio" name="q23" value="0"> A. Lithosphere</label><label><input type="radio" name="q23" value="1"> B. Inner Core</label><label><input type="radio" name="q23" value="2"> C. Mesosphere</label><label><input type="radio" name="q23" value="3"> D. Outer Core</label><div class="feedback" id="f23"></div></div>
+<div class="card" id="q24"><div class="question">24. Which two layers are directly next to the outer core?</div>
+<label><input type="radio" name="q24" value="0"> A. Lithosphere and Asthenosphere</label><label><input type="radio" name="q24" value="1"> B. Mesosphere and Inner Core</label><label><input type="radio" name="q24" value="2"> C. Asthenosphere and Lithosphere</label><label><input type="radio" name="q24" value="3"> D. Inner Core and Lithosphere</label><div class="feedback" id="f24"></div></div>
 <div class="actions">
   <button id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
   <button id="retryBtn" onclick="retryQuiz()" style="display:none">Retry Quiz</button>
@@ -81,38 +97,59 @@ function render(){
  });
 }
 function submitQuiz(){
- let score=0, missing=0;
+ let score=0,missing=0;
  questions.forEach((x,i)=>{
-   const card=document.getElementById("q"+i), chosen=document.querySelector(`input[name="q${i}"]:checked`);
-   card.classList.remove("correct","incorrect","unanswered");
-   const f=document.getElementById("f"+i);
-   if(!chosen){missing++;card.classList.add("unanswered");f.style.display="none";return;}
-   const val=Number(chosen.value);
-   if(val===x[2]){score++;card.classList.add("correct");f.innerHTML=`<span class="answer">Correct.</span> ${x[3]}`;}
-   else{card.classList.add("incorrect");f.innerHTML=`<span class="answer">Correct answer: ${x[1][x[2]]}</span><br>${x[3]}`;}
-   f.style.display="block";
-   card.querySelectorAll("input").forEach(el=>el.disabled=true);
+  const card=document.getElementById("q"+i),chosen=document.querySelector(`input[name="q${i}"]:checked`),f=document.getElementById("f"+i);
+  card.classList.remove("correct","incorrect","unanswered");
+  if(!chosen){missing++;card.classList.add("unanswered");f.style.display="none";return;}
+  const good=Number(chosen.value)===x[2];if(good)score++;
+  card.classList.add(good?"correct":"incorrect");
+  f.innerHTML=good?`<span class="answer">Correct.</span> ${x[3]}`:`<span class="answer">Correct answer: ${x[1][x[2]]}</span><br>${x[3]}`;
+  f.style.display="block";
  });
- if(missing){alert(`Please answer all questions before submitting. ${missing} question${missing>1?"s are":" is"} unanswered.`);return;}
- const pct=Math.round(score/questions.length*100);
- let msg=pct>=90?"Excellent work!":pct>=80?"Good job — review the missed questions.":pct>=70?"Getting there — review the explanations and retry.":"Use the feedback to review the layers, then retry the quiz.";
- const r=document.getElementById("results");
- r.innerHTML=`<h2>Quiz Results</h2><div class="score">${score} / ${questions.length} — ${pct}%</div><p>${msg}</p>`;
- r.style.display="block";
- document.getElementById("submitBtn").style.display="none";
- document.getElementById("retryBtn").style.display="inline-block";
- r.scrollIntoView({behavior:"smooth"});
+ const extra=[["q22",1,"Outer Core","The outer core surrounds the inner core."],["q23",2,"Mesosphere","Moving inward, the mesosphere comes after the asthenosphere."],["q24",1,"Mesosphere and Inner Core","The outer core lies between the mesosphere and inner core."]];
+ extra.forEach(([id,ans,name,ex])=>{
+  const card=document.getElementById(id),chosen=document.querySelector(`input[name="${id}"]:checked`),f=document.getElementById("f"+id.slice(1));
+  card.classList.remove("correct","incorrect","unanswered");
+  if(!chosen){missing++;card.classList.add("unanswered");f.style.display="none";return;}
+  const good=Number(chosen.value)===ans;if(good)score++;card.classList.add(good?"correct":"incorrect");
+  f.innerHTML=good?`<span class="answer">Correct.</span> ${ex}`:`<span class="answer">Correct answer: ${name}</span><br>${ex}`;f.style.display="block";
+ });
+ if(missing){alert(`Please answer all multiple-choice questions before submitting. ${missing} unanswered.`);return;}
+ const correctOrder=["Inner Core","Outer Core","Mesosphere","Asthenosphere","Lithosphere"];
+ const orderGood=orderItems.every((v,i)=>v===correctOrder[i]);if(orderGood)score++;
+ const oc=document.getElementById("orderCard"),of=document.getElementById("orderFeedback");oc.classList.add(orderGood?"correct":"incorrect");
+ of.innerHTML=orderGood?'<span class="answer">Correct.</span> Inner Core → Outer Core → Mesosphere → Asthenosphere → Lithosphere':'<span class="answer">Correct order:</span> Inner Core → Outer Core → Mesosphere → Asthenosphere → Lithosphere';of.style.display="block";
+ document.querySelectorAll("input").forEach(el=>el.disabled=true);
+ const pct=Math.round(score/24*100),r=document.getElementById("results");
+ r.innerHTML=`<h2>Quiz Results</h2><div class="score">${score} / 24 — ${pct}%</div><p>${pct>=90?"Excellent work!":pct>=80?"Good job — review the missed questions.":pct>=70?"Getting there — review the explanations and retry.":"Review the layer order and properties, then retry the quiz."}</p>`;
+ r.style.display="block";document.getElementById("submitBtn").style.display="none";document.getElementById("retryBtn").style.display="inline-block";r.scrollIntoView({behavior:"smooth"});
 }
 function retryQuiz(){
  document.querySelectorAll("input").forEach(el=>{el.checked=false;el.disabled=false});
  document.querySelectorAll(".card").forEach(el=>el.classList.remove("correct","incorrect","unanswered"));
  document.querySelectorAll(".feedback").forEach(el=>el.style.display="none");
  document.getElementById("results").style.display="none";
+ document.getElementById("orderCard").classList.remove("correct","incorrect");
+ document.getElementById("orderFeedback").style.display="none";
+ ["q22","q23","q24"].forEach(id=>{document.getElementById(id).classList.remove("correct","incorrect","unanswered");document.getElementById("f"+id.slice(1)).style.display="none";});
+ orderItems=["Asthenosphere","Inner Core","Lithosphere","Mesosphere","Outer Core"];renderOrder();
  document.getElementById("submitBtn").style.display="inline-block";
  document.getElementById("retryBtn").style.display="none";
  window.scrollTo({top:0,behavior:"smooth"});
 }
+let orderItems=["Asthenosphere","Inner Core","Lithosphere","Mesosphere","Outer Core"];
+function renderOrder(){
+ const ul=document.getElementById("orderList");ul.innerHTML="";
+ orderItems.forEach((name,i)=>{
+  const li=document.createElement("li");li.className="order-item";
+  li.innerHTML=`<span>${i+1}. ${name}</span><button type="button" class="move" onclick="moveItem(${i},-1)" ${i===0?"disabled":""}>↑</button><button type="button" class="move" onclick="moveItem(${i},1)" ${i===orderItems.length-1?"disabled":""}>↓</button>`;
+  ul.appendChild(li);
+ });
+}
+function moveItem(i,d){const j=i+d;if(j<0||j>=orderItems.length)return;[orderItems[i],orderItems[j]]=[orderItems[j],orderItems[i]];renderOrder();}
 render();
+renderOrder();
 </script>
 </body>
 </html>
