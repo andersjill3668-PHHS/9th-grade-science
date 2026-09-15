@@ -1,334 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scientific Notation: Adding & Subtracting Quiz</title>
-  <style>
-    :root{
-      --bg:#f4f7fb;
-      --card:#ffffff;
-      --text:#1d2433;
-      --muted:#657086;
-      --accent:#3157c8;
-      --accent2:#e9efff;
-      --good:#147a45;
-      --goodbg:#eaf8f0;
-      --bad:#b42318;
-      --badbg:#fff0ee;
-      --border:#dce2ec;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.45;
-    }
-    .wrap{
-      max-width:900px;
-      margin:0 auto;
-      padding:28px 16px 56px;
-    }
-    .hero{
-      background:linear-gradient(135deg,#1f3c91,#4e73df);
-      color:white;
-      border-radius:18px;
-      padding:28px;
-      box-shadow:0 10px 28px rgba(28,48,100,.16);
-      margin-bottom:20px;
-    }
-    h1{margin:0 0 8px;font-size:clamp(1.7rem,4vw,2.45rem)}
-    .hero p{margin:0;opacity:.94}
-    .data-card,.question-card,.result-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:16px;
-      box-shadow:0 5px 16px rgba(36,46,66,.06);
-    }
-    .data-card{
-      padding:20px;
-      margin-bottom:20px;
-      overflow:auto;
-    }
-    .data-card h2{margin:0 0 12px;font-size:1.15rem}
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:520px;
-    }
-    th,td{
-      text-align:left;
-      padding:10px 12px;
-      border-bottom:1px solid var(--border);
-    }
-    th{background:#f8faff}
-    tr:last-child td{border-bottom:none}
-    .note{font-size:.92rem;color:var(--muted);margin-top:10px}
-    #quiz{display:grid;gap:16px}
-    .question-card{padding:20px}
-    .question-number{
-      color:var(--accent);
-      font-weight:800;
-      font-size:.9rem;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      margin-bottom:6px;
-    }
-    .question-text{
-      font-size:1.08rem;
-      font-weight:650;
-      margin-bottom:14px;
-    }
-    .options{display:grid;gap:9px}
-    .option{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:11px 12px;
-      cursor:pointer;
-      transition:.15s ease;
-    }
-    .option:hover{border-color:#9eb1ef;background:#fafbff}
-    .option input{margin-top:3px}
-    .option.correct{border-color:#79bf97;background:var(--goodbg)}
-    .option.incorrect{border-color:#ec9c95;background:var(--badbg)}
-    .feedback{
-      margin-top:12px;
-      padding:10px 12px;
-      border-radius:10px;
-      display:none;
-      font-size:.94rem;
-    }
-    .feedback.good{display:block;color:var(--good);background:var(--goodbg)}
-    .feedback.bad{display:block;color:var(--bad);background:var(--badbg)}
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin:22px 0;
-    }
-    button{
-      border:0;
-      border-radius:11px;
-      padding:12px 18px;
-      font-weight:750;
-      font-size:1rem;
-      cursor:pointer;
-    }
-    #submitBtn{background:var(--accent);color:white}
-    #retryBtn{background:#e9edf5;color:#25314b;display:none}
-    button:disabled{opacity:.55;cursor:not-allowed}
-    .result-card{
-      padding:20px;
-      margin-top:4px;
-      display:none;
-    }
-    .score{
-      font-size:1.6rem;
-      font-weight:850;
-      margin-bottom:5px;
-    }
-    .small{color:var(--muted);font-size:.94rem}
-    @media (max-width:600px){
-      .wrap{padding:16px 10px 40px}
-      .hero,.question-card,.data-card,.result-card{border-radius:13px}
-      .hero{padding:22px 18px}
-      .question-card{padding:17px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layers of the Earth Practice Quiz</title>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;background:#f2f5f7;color:#17212b;margin:0;padding:24px}
+  .wrap{max-width:900px;margin:auto}
+  header,.card,.results{background:#fff;border-radius:14px;padding:24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+  h1{margin:0 0 8px;font-size:30px} h2{font-size:20px}
+  .sub{color:#52606d;margin:0}
+  .question{font-weight:700;font-size:18px;margin-bottom:14px}
+  label{display:block;border:1px solid #d8dee4;border-radius:9px;padding:11px 12px;margin:8px 0;cursor:pointer}
+  label:hover{background:#f6f8fa}
+  input{margin-right:9px}
+  button{border:0;border-radius:9px;padding:13px 20px;font-size:16px;font-weight:700;cursor:pointer;margin-right:10px}
+  #submitBtn{background:#1f6f43;color:white}
+  #retryBtn{background:#34495e;color:white}
+  .actions{text-align:center;margin:26px 0}
+  .results{display:none;text-align:center}
+  .score{font-size:34px;font-weight:800;margin:10px}
+  .feedback{display:none;margin-top:12px;padding:12px;border-radius:8px;line-height:1.45}
+  .correct{border:2px solid #2e7d32;background:#edf8ef}
+  .incorrect{border:2px solid #b3261e;background:#fff0ef}
+  .correct .feedback{background:#dff2e3}
+  .incorrect .feedback{background:#ffe0de}
+  .answer{font-weight:700}
+  .unanswered{outline:3px solid #e0a800}
+  footer{text-align:center;color:#667085;font-size:13px;padding:10px}
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <h1>Adding & Subtracting with Scientific Notation</h1>
-      <p>Use the planet-distance table to answer each question. Choose the answer written correctly in scientific notation.</p>
-    </section>
-
-    <section class="data-card" aria-label="Planet distance reference table">
-      <h2>Reference Table — Average Distance in Miles</h2>
-      <table>
-        <thead>
-          <tr><th>From</th><th>To</th><th>Average Miles</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Mercury</td><td>Venus</td><td>30,700,000</td></tr>
-          <tr><td>Venus</td><td>Earth</td><td>26,000,000</td></tr>
-          <tr><td>Earth</td><td>Mars</td><td>48,300,000</td></tr>
-          <tr><td>Earth</td><td>Jupiter</td><td>390,400,000</td></tr>
-          <tr><td>Earth</td><td>Saturn</td><td>793,800,000</td></tr>
-          <tr><td>Saturn</td><td>Jupiter</td><td>403,400,000</td></tr>
-          <tr><td>Jupiter</td><td>Mars</td><td>342,000,000</td></tr>
-        </tbody>
-      </table>
-      <div class="note">The questions and answer choices are shuffled each time you retry.</div>
-    </section>
-
-    <form id="quiz"></form>
-
-    <div class="actions">
-      <button type="button" id="submitBtn">Submit Quiz</button>
-      <button type="button" id="retryBtn">Retry Quiz</button>
-    </div>
-
-    <section class="result-card" id="resultCard" aria-live="polite">
-      <div class="score" id="scoreText"></div>
-      <div class="small" id="scoreMessage"></div>
-    </section>
-  </main>
+<div class="wrap">
+<header>
+  <h1>Layers of the Earth — Practice Quiz</h1>
+  <p class="sub">20 questions based on the class worksheet: composition, thickness, and state of matter.</p>
+</header>
+<div id="quiz"></div>
+<div class="actions">
+  <button id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
+  <button id="retryBtn" onclick="retryQuiz()" style="display:none">Retry Quiz</button>
+</div>
+<div id="results" class="results"></div>
+<footer>Practice Quiz • Layers of the Earth</footer>
+</div>
 
 <script>
-const originalQuestions = [
-  {
-    q: "How much farther is Earth from Saturn than it is from Jupiter?",
-    correct: "4.034 × 10⁸ miles",
-    choices: ["4.034 × 10⁸ miles","4.034 × 10⁷ miles","3.904 × 10⁸ miles","7.455 × 10⁸ miles"],
-    explanation: "793,800,000 − 390,400,000 = 403,400,000 = 4.034 × 10⁸ miles."
-  },
-  {
-    q: "Suppose you travel from Saturn to Jupiter and then from Jupiter to Mars. What is the total distance?",
-    correct: "7.454 × 10⁸ miles",
-    choices: ["7.454 × 10⁸ miles","7.455 × 10⁸ miles","4.034 × 10⁸ miles","3.420 × 10⁸ miles"],
-    explanation: "403,400,000 + 342,000,000 = 745,400,000 = 7.454 × 10⁸ miles."
-  },
-  {
-    q: "How much closer is Saturn to Jupiter than Saturn is to Earth?",
-    correct: "3.904 × 10⁸ miles",
-    choices: ["3.904 × 10⁸ miles","4.034 × 10⁸ miles","7.938 × 10⁸ miles","3.904 × 10⁷ miles"],
-    explanation: "793,800,000 − 403,400,000 = 390,400,000 = 3.904 × 10⁸ miles."
-  },
-  {
-    q: "What is the total distance from Mercury to Earth if you travel from Mercury to Venus and then Venus to Earth?",
-    correct: "5.67 × 10⁷ miles",
-    choices: ["5.67 × 10⁷ miles","5.67 × 10⁸ miles","3.07 × 10⁷ miles","2.60 × 10⁷ miles"],
-    explanation: "30,700,000 + 26,000,000 = 56,700,000 = 5.67 × 10⁷ miles."
-  },
-  {
-    q: "Which is closer to Earth, Venus or Mars, and by how much?",
-    correct: "Venus by 2.23 × 10⁷ miles",
-    choices: ["Venus by 2.23 × 10⁷ miles","Mars by 2.23 × 10⁷ miles","Venus by 7.43 × 10⁷ miles","Mars by 7.43 × 10⁷ miles"],
-    explanation: "Venus is 26,000,000 miles from Earth and Mars is 48,300,000 miles away. The difference is 22,300,000 = 2.23 × 10⁷ miles."
-  },
-  {
-    q: "How much farther is Earth from Saturn than it is from Mars?",
-    correct: "7.455 × 10⁸ miles",
-    choices: ["7.455 × 10⁸ miles","7.454 × 10⁸ miles","7.938 × 10⁸ miles","4.830 × 10⁷ miles"],
-    explanation: "793,800,000 − 48,300,000 = 745,500,000 = 7.455 × 10⁸ miles."
-  }
+const questions = [
+["Which Earth layer is rocky, rigid, and about 100 km thick?",["Lithosphere","Asthenosphere","Outer Core","Inner Core"],0,"The lithosphere is rocky and rigid and is about 100 km thick on the worksheet."],
+["Which state of matter or behavior belongs with the asthenosphere?",["Rigid","Plastic","Liquid","Gas"],1,"The asthenosphere is plastic, meaning it can deform somewhat like putty or clay."],
+["On the worksheet, the word “plastic” describes which property of the asthenosphere?",["Composition","Thickness","State of matter/behavior","Depth"],2,"Plastic describes how the material behaves, so it belongs under state of matter/behavior."],
+["Approximately how thick is the asthenosphere?",["100 km","200 km","1,220 km","2,440 km"],1,"The worksheet lists the asthenosphere at approximately 200 km thick."],
+["Which layer is approximately 2,440 km thick?",["Lithosphere","Asthenosphere","Mesosphere","Inner Core"],2,"The mesosphere is listed as approximately 2,440 km thick."],
+["What state of matter or behavior is associated with the mesosphere?",["Rigid","Plastic","Liquid","Gas"],0,"The worksheet identifies the mesosphere as rigid."],
+["Which layer is composed mainly of iron and nickel and is liquid?",["Lithosphere","Mesosphere","Outer Core","Inner Core"],2,"The outer core is mainly iron and nickel and is liquid."],
+["Which layer is composed mainly of iron and nickel and is rigid/solid?",["Inner Core","Outer Core","Asthenosphere","Oceanic Crust"],0,"The inner core is mainly iron and nickel and is rigid/solid."],
+["Approximately how thick is the outer core on the worksheet?",["100 km","200 km","1,260 km","2,440 km"],2,"The worksheet lists the outer core at approximately 1,260 km thick."],
+["Approximately how thick is the inner core on the worksheet?",["100 km","200 km","1,220 km","2,440 km"],2,"The worksheet lists the inner core at approximately 1,220 km thick."],
+["Which pair has the same basic composition but different states of matter?",["Outer Core and Inner Core","Asthenosphere and Outer Core","Lithosphere and Inner Core","Mesosphere and Outer Core"],0,"Both core layers are mainly iron and nickel. The outer core is liquid while the inner core is rigid/solid."],
+["Which statement correctly compares the outer core and inner core?",["Both are liquid.","Both are rocky and plastic.","Both contain mainly iron and nickel, but the outer core is liquid and the inner core is rigid/solid.","The outer core is rocky while the inner core is liquid."],2,"The two core layers have similar composition but different physical states."],
+["Which layer is located directly below the lithosphere?",["Asthenosphere","Outer Core","Inner Core","Mesosphere"],0,"The asthenosphere lies directly below the lithosphere."],
+["Which sequence correctly orders the physical layers from near the surface toward the center?",["Lithosphere → Asthenosphere → Mesosphere → Outer Core → Inner Core","Asthenosphere → Lithosphere → Mesosphere → Inner Core → Outer Core","Lithosphere → Mesosphere → Asthenosphere → Outer Core → Inner Core","Inner Core → Outer Core → Mesosphere → Asthenosphere → Lithosphere"],0,"The correct inward order is lithosphere, asthenosphere, mesosphere, outer core, inner core."],
+["The worksheet describes oceanic crust as which general type of material?",["Rocky","Iron and nickel","Liquid metal","Plastic metal"],0,"Oceanic crust is rocky material."],
+["The worksheet describes continental crust as which general type of material?",["Liquid iron","Rocky","Plastic nickel","Liquid rock"],1,"Continental crust is rocky material."],
+["Which property best describes both oceanic crust and continental crust?",["Liquid","Plastic","Rigid","Iron and nickel"],2,"Both types of crust are rigid rocky material."],
+["A layer is about 200 km thick and plastic. Which layer is it?",["Lithosphere","Asthenosphere","Mesosphere","Outer Core"],1,"About 200 km thick plus plastic behavior identifies the asthenosphere."],
+["A layer is about 2,440 km thick and rigid. Which layer is it?",["Asthenosphere","Lithosphere","Mesosphere","Outer Core"],2,"About 2,440 km thick plus rigid behavior identifies the mesosphere."],
+["A student writes “iron and nickel” in the state-of-matter column for the outer core. What is the best correction?",["Move iron and nickel to composition; write liquid for state of matter.","Keep iron and nickel there; write rocky for composition.","Replace iron and nickel with rigid; write plastic for composition.","Move iron and nickel to thickness; write 200 km for state of matter."],0,"Iron and nickel describe composition—what the layer is made of. Liquid describes the outer core's state of matter."]
 ];
 
-let activeQuestions = [];
-let submitted = false;
-
-function shuffle(arr){
-  const a = [...arr];
-  for(let i=a.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]] = [a[j],a[i]];
-  }
-  return a;
+function render(){
+ const q=document.getElementById("quiz"); q.innerHTML="";
+ questions.forEach((x,i)=>{
+   const d=document.createElement("div"); d.className="card"; d.id="q"+i;
+   d.innerHTML=`<div class="question">${i+1}. ${x[0]}</div>`+
+   x[1].map((a,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${String.fromCharCode(65+j)}. ${a}</label>`).join("")+
+   `<div class="feedback" id="f${i}"></div>`;
+   q.appendChild(d);
+ });
 }
-
-function buildQuiz(){
-  submitted = false;
-  activeQuestions = shuffle(originalQuestions).map(item => ({
-    ...item,
-    choices: shuffle(item.choices)
-  }));
-
-  const quiz = document.getElementById("quiz");
-  quiz.innerHTML = "";
-
-  activeQuestions.forEach((item,index)=>{
-    const card = document.createElement("section");
-    card.className = "question-card";
-    card.dataset.index = index;
-
-    const optionsHTML = item.choices.map((choice,choiceIndex)=>{
-      const id = `q${index}_c${choiceIndex}`;
-      return `
-        <label class="option" for="${id}">
-          <input type="radio" id="${id}" name="q${index}" value="${escapeHtml(choice)}">
-          <span>${choice}</span>
-        </label>`;
-    }).join("");
-
-    card.innerHTML = `
-      <div class="question-number">Question ${index+1} of ${activeQuestions.length}</div>
-      <div class="question-text">${item.q}</div>
-      <div class="options">${optionsHTML}</div>
-      <div class="feedback" id="feedback${index}"></div>
-    `;
-    quiz.appendChild(card);
-  });
-
-  document.getElementById("resultCard").style.display = "none";
-  document.getElementById("retryBtn").style.display = "none";
-  document.getElementById("submitBtn").disabled = false;
-  window.scrollTo({top:0,behavior:"smooth"});
+function submitQuiz(){
+ let score=0, missing=0;
+ questions.forEach((x,i)=>{
+   const card=document.getElementById("q"+i), chosen=document.querySelector(`input[name="q${i}"]:checked`);
+   card.classList.remove("correct","incorrect","unanswered");
+   const f=document.getElementById("f"+i);
+   if(!chosen){missing++;card.classList.add("unanswered");f.style.display="none";return;}
+   const val=Number(chosen.value);
+   if(val===x[2]){score++;card.classList.add("correct");f.innerHTML=`<span class="answer">Correct.</span> ${x[3]}`;}
+   else{card.classList.add("incorrect");f.innerHTML=`<span class="answer">Correct answer: ${x[1][x[2]]}</span><br>${x[3]}`;}
+   f.style.display="block";
+   card.querySelectorAll("input").forEach(el=>el.disabled=true);
+ });
+ if(missing){alert(`Please answer all questions before submitting. ${missing} question${missing>1?"s are":" is"} unanswered.`);return;}
+ const pct=Math.round(score/questions.length*100);
+ let msg=pct>=90?"Excellent work!":pct>=80?"Good job — review the missed questions.":pct>=70?"Getting there — review the explanations and retry.":"Use the feedback to review the layers, then retry the quiz.";
+ const r=document.getElementById("results");
+ r.innerHTML=`<h2>Quiz Results</h2><div class="score">${score} / ${questions.length} — ${pct}%</div><p>${msg}</p>`;
+ r.style.display="block";
+ document.getElementById("submitBtn").style.display="none";
+ document.getElementById("retryBtn").style.display="inline-block";
+ r.scrollIntoView({behavior:"smooth"});
 }
-
-function escapeHtml(text){
-  return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function retryQuiz(){
+ document.querySelectorAll("input").forEach(el=>{el.checked=false;el.disabled=false});
+ document.querySelectorAll(".card").forEach(el=>el.classList.remove("correct","incorrect","unanswered"));
+ document.querySelectorAll(".feedback").forEach(el=>el.style.display="none");
+ document.getElementById("results").style.display="none";
+ document.getElementById("submitBtn").style.display="inline-block";
+ document.getElementById("retryBtn").style.display="none";
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-
-document.getElementById("submitBtn").addEventListener("click",()=>{
-  if(submitted) return;
-
-  const unanswered = activeQuestions.some((_,i)=>!document.querySelector(`input[name="q${i}"]:checked`));
-  if(unanswered){
-    alert("Please answer every question before submitting.");
-    return;
-  }
-
-  let score = 0;
-  activeQuestions.forEach((item,index)=>{
-    const selected = document.querySelector(`input[name="q${index}"]:checked`);
-    const selectedValue = selected.value;
-    const card = document.querySelector(`.question-card[data-index="${index}"]`);
-    const labels = card.querySelectorAll(".option");
-    const feedback = document.getElementById(`feedback${index}`);
-
-    labels.forEach(label=>{
-      const input = label.querySelector("input");
-      input.disabled = true;
-      if(input.value === item.correct) label.classList.add("correct");
-      if(input.checked && input.value !== item.correct) label.classList.add("incorrect");
-    });
-
-    if(selectedValue === item.correct){
-      score++;
-      feedback.className = "feedback good";
-      feedback.textContent = "Nice work. " + item.explanation;
-    } else {
-      feedback.className = "feedback bad";
-      feedback.textContent = "Review: " + item.explanation;
-    }
-  });
-
-  submitted = true;
-  const pct = Math.round((score/activeQuestions.length)*100);
-  document.getElementById("scoreText").textContent = `Score: ${score} / ${activeQuestions.length} (${pct}%)`;
-
-  let message = "";
-  if(pct === 100) message = "Excellent — all answers are correct.";
-  else if(pct >= 80) message = "Strong work. Review the missed question(s), then retry if you want another shuffled version.";
-  else if(pct >= 60) message = "Good start. Use the worked feedback to review the missed questions, then retry.";
-  else message = "Review the calculations shown under each question, then retry for a newly shuffled quiz.";
-
-  document.getElementById("scoreMessage").textContent = message;
-  document.getElementById("resultCard").style.display = "block";
-  document.getElementById("retryBtn").style.display = "inline-block";
-  document.getElementById("submitBtn").disabled = true;
-  document.getElementById("resultCard").scrollIntoView({behavior:"smooth",block:"center"});
-});
-
-document.getElementById("retryBtn").addEventListener("click",buildQuiz);
-
-buildQuiz();
+render();
 </script>
 </body>
 </html>
